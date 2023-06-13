@@ -46,6 +46,16 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsPage />,
+            loader: async () => {
+              const response = await fetch("http://localhost:8080/events");
+
+              if (!response.ok) {
+                //나중에 올바르지 않은 응답상태 처리하기
+              } else {
+                const resData = await response.json();
+                return resData.event;
+              }
+            },
           },
           { path: "new", element: <NewEventPage /> },
           { path: ":id", element: <EventDetailPage /> },

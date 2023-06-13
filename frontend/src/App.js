@@ -27,7 +27,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 
 import EventsRootLayout from "./pages/EventsRootLayout";
-import EventsPage from "./pages/EventsPage";
+import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import NewEventPage from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
@@ -46,16 +46,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsPage />,
-            loader: async () => {
-              const response = await fetch("http://localhost:8080/events");
-
-              if (!response.ok) {
-                //나중에 올바르지 않은 응답상태 처리하기
-              } else {
-                const resData = await response.json();
-                return resData.event;
-              }
-            },
+            loader: eventsLoader,
           },
           { path: "new", element: <NewEventPage /> },
           { path: ":id", element: <EventDetailPage /> },

@@ -10,8 +10,7 @@ function ErrorPage() {
 
   //이벤트 페치 실패 시
   if (error.status === 500) {
-    message = JSON.parse(error.data).message;
-    //JSON형식을 파싱한 후 message에 액세스
+    message = error.data.message;
   }
 
   //지원하지 않는 경로 접근 시

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { json, useLoaderData } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
 function EventsPage() {
@@ -15,10 +15,7 @@ export const loader = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    throw new Response(
-      JSON.stringify({ message: "이벤트를 가져올 수 없습니다." }),
-      { status: 500 }
-    );
+    throw json({ message: "이벤트를 가져올 수 없습니다." }, { status: 500 });
   } else {
     return response;
   }

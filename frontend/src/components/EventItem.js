@@ -1,10 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 import classes from "./EventItem.module.css";
 
 function EventItem({ event }) {
-  function startDeleteHandler() {
-    // ...
-  }
+  const submit = useSubmit();
+
+  const startDeleteHandler = () => {
+    const proceed = window.confirm("이벤트를 정말 삭제 하시겠습니까?");
+
+    if (proceed) {
+      //이벤트 삭제 액션 트리거
+      submit(null, { method: "delete" });
+    } else {
+      return;
+    }
+  };
 
   return (
     <article className={classes.event}>

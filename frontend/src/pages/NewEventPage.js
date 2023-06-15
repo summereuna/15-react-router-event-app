@@ -23,6 +23,12 @@ export const action = async ({ request, params }) => {
     body: JSON.stringify(newEventData),
   });
 
+  //잠재적인 백엔드 검증 오류에 대응하기
+  if (response.status === 422) {
+    return response;
+    //응답 객체 리턴하여 폼 위에 표시
+  }
+
   if (!response.ok) {
     throw json(
       { message: "새로운 이벤트를 저장할 수 없습니다!" },

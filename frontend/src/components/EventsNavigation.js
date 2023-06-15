@@ -14,7 +14,7 @@ function EventsNavigation() {
                 isActive ? classes.active : undefined
               }
             >
-              All Events
+              모든 이벤트
             </NavLink>
           </li>
           <li>
@@ -24,7 +24,7 @@ function EventsNavigation() {
                 isActive ? classes.active : undefined
               }
             >
-              New Event
+              새로운 이벤트
             </NavLink>
           </li>
         </ul>

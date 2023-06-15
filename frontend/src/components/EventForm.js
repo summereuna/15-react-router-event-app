@@ -1,4 +1,4 @@
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useNavigation } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
@@ -7,11 +7,13 @@ function EventForm({ method, event }) {
   function cancelHandler() {
     navigate("..");
   }
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   return (
     <Form className={classes.form} method={method}>
       <p>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">제목</label>
         <input
           id="title"
           type="text"
@@ -21,7 +23,7 @@ function EventForm({ method, event }) {
         />
       </p>
       <p>
-        <label htmlFor="image">Image</label>
+        <label htmlFor="image">이미지</label>
         <input
           id="image"
           type="url"
@@ -31,7 +33,7 @@ function EventForm({ method, event }) {
         />
       </p>
       <p>
-        <label htmlFor="date">Date</label>
+        <label htmlFor="date">날짜</label>
         <input
           id="date"
           type="date"
@@ -41,7 +43,7 @@ function EventForm({ method, event }) {
         />
       </p>
       <p>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">설명</label>
         <textarea
           id="description"
           name="description"
@@ -51,10 +53,12 @@ function EventForm({ method, event }) {
         />
       </p>
       <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
-          Cancel
+        <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
+          취소
         </button>
-        <button>Save</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? "제출 중..." : "저장"}
+        </button>
       </div>
     </Form>
   );

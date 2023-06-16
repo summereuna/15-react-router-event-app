@@ -17,6 +17,7 @@ function EventsPage() {
 
 export default EventsPage;
 
+//이벤트 리스트 가져오는 http 요청
 //이벤트 로딩을 연기하기 위해 별도의 함수에 http 요청 작성
 const loadEvents = async () => {
   const response = await fetch("http://localhost:8080/events");
